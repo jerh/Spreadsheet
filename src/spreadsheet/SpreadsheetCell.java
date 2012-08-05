@@ -32,7 +32,7 @@ public class SpreadsheetCell {
     public void setValue(String value) {
         if (value == null || value.trim() == "") {
             obj = null;
-        } else if( Util.isNumber(value)) {
+        } else if (Util.isNumber(value)) {
             obj = new DoubleCellObject(value);
         } else {
             obj = new FormulaCellObject(this, value);

@@ -26,7 +26,7 @@ public class ReferenceCellObject implements CellObject {
             int column = Integer.parseInt(m.group(2))-1;
             return sheet.getCell(row, column);
         } else {
-            return null;
+            throw new RuntimeException(identifier+" is not a valid cell identifier");
         }
     }
 }

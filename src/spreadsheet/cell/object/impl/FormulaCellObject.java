@@ -49,15 +49,19 @@ public class FormulaCellObject implements CellObject {
     }
 
     private void parseFormula(String value) {
-        String[] variables = value.split("[\\+\\-\\*\\/]");
+        String formula = value.replaceAll("\\s", "");
+
+        if (formula.matches("\\w+[\\+\\-\\*\\/]{2,}\\w+")) {
+            throw new RuntimeException(value+" is not a valid formula");
+        }
+
+        String[] variables = formula.split("[\\+\\-\\*\\/]");
         for (String variable : variables) {
-            if (!variable.trim().isEmpty()) {
-                if (Util.isNumber(value)) {
-                    values.add(new DoubleCellObject(variable));
-                } else {
-                    values.add(new ReferenceCellObject(inSpreadsheetCell.getSpreadsheet(),
-                                                    variable));
-                }
+            if (Util.isNumber(variable)) {
+                values.add(new DoubleCellObject(variable));
+            } else {
+                values.add(new ReferenceCellObject(inSpreadsheetCell.getSpreadsheet(),
+                                                 variable));
             }
         }
 

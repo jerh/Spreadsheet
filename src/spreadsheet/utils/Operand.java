@@ -13,7 +13,7 @@ public enum Operand {
 		} else if (c == '/') {
 			return DIVIDE;
 		} else {
-			return null;
+			throw new RuntimeException(c+" is an invalid operand");
 		}
 	}
 }
